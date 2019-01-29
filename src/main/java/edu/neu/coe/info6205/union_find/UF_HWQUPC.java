@@ -78,12 +78,9 @@ public class UF_HWQUPC implements UF {
     public int find(int p) {
         validate(p);
         int root = p;
-        while (root != parent[root]) {
-            if (pathCompression) doPathCompression(root);
-            root = parent[root];
-        }
+        // TO BE IMPLEMENTED ...
+        // ... end of IMPLEMENTATION
         return root;
-        // ... end of TODO
     }
 
     /**
