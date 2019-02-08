@@ -176,4 +176,8 @@ public class UF_HWQUPC implements UF {
         throw new RuntimeException("not implemented");
         // ... END IMPLEMENTATION
     }
+    @Override
+    public int size() {
+        return parent.length;
+    }
 }

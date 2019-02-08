@@ -1,4 +1,4 @@
-package edu.neu.coe.info6205.dag;
+package edu.neu.coe.info6205.graphs.dag;
 
 import java.util.function.Function;
 
