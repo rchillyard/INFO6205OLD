@@ -8,6 +8,7 @@ import edu.neu.coe.info6205.graphs.undirected.Graph_Edges;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 import static edu.neu.coe.info6205.graphs.gis.Kruskal.createEdge;
@@ -24,7 +25,7 @@ public class KruskalTest {
 //        System.out.println(edgeList);
         Edge<String, Double> edge1 = edgeList.get(5);
         Edge<String, Double> edge2 = edgeList.get(0);
-        Kruskal<String, Double> kruskal = new Kruskal<>(kalimantan);
+        Kruskal<String, Double> kruskal = new Kruskal<>(kalimantan,Comparator.comparing((Edge e1) -> (Double)e1.getAttribute()));
         Iterator<Edge> iterator = kruskal.iterator();
         assertTrue(iterator.hasNext());
         assertEquals(edge1, iterator.next());
