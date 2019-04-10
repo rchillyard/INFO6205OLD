@@ -7,6 +7,7 @@ import edu.neu.coe.info6205.graphs.undirected.EdgeGraph;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
 
@@ -33,7 +34,7 @@ public class Tunnels implements Iterable<Edge> {
     public Tunnels(ArrayList<Building> buildings) {
         setupZones();
         setupTunnels();
-        kruskal = new GeoKruskal<>(createGraph(buildings));
+        kruskal = new GeoKruskal<>(createGraph(buildings), Comparator.comparing((Edge e) -> ((TunnelProperties) e.getAttribute())));
     }
 
     public EdgeGraph<Building, TunnelProperties> getMst() {

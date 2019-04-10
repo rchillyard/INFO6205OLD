@@ -3,9 +3,11 @@ package edu.neu.coe.info6205.graphs.gis;
 import edu.neu.coe.info6205.graphs.undirected.Edge;
 import edu.neu.coe.info6205.graphs.undirected.EdgeGraph;
 
+import java.util.Comparator;
+
 public class GeoKruskal<V extends GeoPoint, X extends Comparable<X>> extends Kruskal<V, X> {
-    public GeoKruskal(EdgeGraph<V, X> graph) {
-        super(graph);
+    public GeoKruskal(EdgeGraph<V, X> graph, Comparator<Edge> comparator) {
+        super(graph,comparator);
     }
 
     /**
