@@ -16,7 +16,7 @@ import java.util.Iterator;
  */
 public class Kruskal<V, X extends Comparable<X>> implements Iterable<Edge> {
 
-    public Kruskal(EdgeGraph<V, X> graph) {
+    public Kruskal(EdgeGraph<V, X> graph,Comparator<Edge> comparator) {
         //TODO takes a graph and outputs an Iterable.
     }
     public EdgeGraph<V, X> getMST() {
