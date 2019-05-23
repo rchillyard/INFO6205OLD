@@ -85,7 +85,8 @@ public class DList<Item> implements Iterable<Item> {
      * @param next may be null, in which case the item will be the only item on the list
      */
     public void addBeforeElement(Item item, D_Element next) {
-        // TODO
+        // TO BE IMPLEMENTED ...
+        // ... END IMPLEMENTATION
     }
 
     /**

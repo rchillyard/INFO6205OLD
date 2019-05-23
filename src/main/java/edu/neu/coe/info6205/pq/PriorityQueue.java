@@ -1,6 +1,9 @@
 package edu.neu.coe.info6205.pq;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Iterator;
 
 /**
  * Priority Queue Data Structure which uses a binary heap.
@@ -17,7 +20,7 @@ import java.util.Comparator;
  *
  * @param <K>
  */
-public class PriorityQueue<K> {
+public class PriorityQueue<K> implements Iterable<K> {
 
     /**
      * Basic constructor that takes the max value, an actually array of elements, and a comparator.
@@ -38,11 +41,12 @@ public class PriorityQueue<K> {
 
     /**
      * Constructor which takes only the priority queue's maximum capacity and a comparator
-     * @param n the desired maximum capacity.
-     * @param max whether or not this is a Maximum Priority Queue as opposed to a Minimum PQ.
+     *
+     * @param n          the desired maximum capacity.
+     * @param max        whether or not this is a Maximum Priority Queue as opposed to a Minimum PQ.
      * @param comparator a comparator for the type K
      */
-    public PriorityQueue (int n, boolean max, Comparator<K> comparator) {
+    public PriorityQueue(int n, boolean max, Comparator<K> comparator) {
 
         // NOTE that we reserve the first element of the binary heap, so the length must be n+1, not n
         this(max, new Object[n + 1], 0, comparator);
@@ -50,10 +54,11 @@ public class PriorityQueue<K> {
 
     /**
      * Constructor which takes only the priority queue's maximum capacity and a comparator
-     * @param n the desired maximum capacity.
+     *
+     * @param n          the desired maximum capacity.
      * @param comparator a comparator for the type K
      */
-    public PriorityQueue (int n, Comparator<K> comparator) {
+    public PriorityQueue(int n, Comparator<K> comparator) {
 
         this(n, true, comparator);
     }
@@ -89,6 +94,7 @@ public class PriorityQueue<K> {
      * Remove the root element from this Priority Queue and adjust the binary heap accordingly.
      * If max is true, then the result will be the maximum element, else the minimum element.
      * NOTE that this method is called DelMax (or DelMin) in the book.
+     *
      * @return If max is true, then the maximum element, otherwise the minimum element.
      * @throws PQException if this priority queue is empty
      */
@@ -182,4 +188,9 @@ public class PriorityQueue<K> {
     private final K[] binHeap; // binHeap[i] is ith element of binary heap (first element is reserved)
     private int last; // number of elements in the binary heap
 
+    @Override
+    public Iterator<K> iterator() {
+        ArrayList<K> result = new ArrayList<>(Arrays.asList(binHeap));
+        return result.iterator();
+    }
 }

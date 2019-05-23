@@ -6,7 +6,7 @@ package edu.neu.coe.info6205.hashtable;
 
 public class FrequencyCounter<K> {
 
-    public FrequencyCounter(ST<K,Integer> map) {
+    public FrequencyCounter(ST<K, Integer> map) {
         this.map = map;
     }
 
@@ -33,6 +33,7 @@ public class FrequencyCounter<K> {
 
     public static void main(String[] args) {
         FrequencyCounter<String> counter = new FrequencyCounter<>();
+
         for (String arg : args) counter.increment(arg);
 
         System.out.println(counter.toString());

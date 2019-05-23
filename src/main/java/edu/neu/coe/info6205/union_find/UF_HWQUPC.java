@@ -1,7 +1,7 @@
 /**
  * Original code:
  * Copyright © 2000–2017, Robert Sedgewick and Kevin Wayne.
- *
+ * <p>
  * Modifications:
  * Copyright (c) 2017. Phasmid Software
  */
@@ -18,7 +18,9 @@ public class UF_HWQUPC implements UF {
      * @param  p the integer representing one site
      * @param  q the integer representing the other site
      */
-    public void connect(int p, int q) { if (!isConnected(p,q)) union(p, q); }
+    public void connect(int p, int q) {
+        if (!isConnected(p, q)) union(p, q);
+    }
 
     /**
      * Initializes an empty union–find data structure with {@code n} sites
@@ -54,7 +56,7 @@ public class UF_HWQUPC implements UF {
     }
 
     public void show() {
-        for (int i=0; i<parent.length; i++) {
+        for (int i = 0; i < parent.length; i++) {
             System.out.printf("%d: %d, %d\n", i, parent[i], height[i]);
         }
     }
@@ -112,6 +114,11 @@ public class UF_HWQUPC implements UF {
         count--;
     }
 
+    @Override
+    public int size() {
+        return parent.length;
+    }
+
     /**
      * Used only by testing code
      * @param pathCompression true if you want path compression
@@ -124,9 +131,9 @@ public class UF_HWQUPC implements UF {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("UF_HWQUPC:");
         stringBuilder.append("\n  count: ").append(count);
-        stringBuilder.append("\n  path compression: ").append(pathCompression);
+        stringBuilder.append("\n  path compression? ").append(pathCompression);
         stringBuilder.append("\n  parents: ").append(Arrays.toString(parent));
-        stringBuilder.append("\n  height: ").append(Arrays.toString(height));
+        stringBuilder.append("\n  heights: ").append(Arrays.toString(height));
         return stringBuilder.toString();
     }
 
@@ -134,7 +141,7 @@ public class UF_HWQUPC implements UF {
     private void validate(int p) {
         int n = parent.length;
         if (p < 0 || p >= n) {
-            throw new IllegalArgumentException("index " + p + " is not between 0 and " + (n-1));
+            throw new IllegalArgumentException("index " + p + " is not between 0 and " + (n - 1));
         }
     }
 

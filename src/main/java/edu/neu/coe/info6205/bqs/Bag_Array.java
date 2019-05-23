@@ -32,7 +32,7 @@ public class Bag_Array<Item> implements Bag<Item> {
     @Override
     public boolean contains(Item item) {
         for (Item i : items) {
-            if (i!=null && i.equals(item))
+            if (i != null && i.equals(item))
                 return true;
         }
         return false;
@@ -43,7 +43,7 @@ public class Bag_Array<Item> implements Bag<Item> {
         int result = 0;
         if (isEmpty()) return 0;
         for (Item i : items) {
-            if (i!=null && i.equals(item))
+            if (i != null && i.equals(item))
                 result++;
         }
         return result;
@@ -61,7 +61,10 @@ public class Bag_Array<Item> implements Bag<Item> {
 
     @Override
     public String toString() {
-        return Arrays.toString(asArray());
+        return "Bag_Array{" +
+                "items=" + Arrays.toString(items) +
+                ", count=" + count +
+                '}';
     }
 
     private void grow(Item[] source, int size) {

@@ -12,29 +12,75 @@ public class PrivateMethodTester {
     private final Object object;
     private final Class<?> clazz;
 
-    public PrivateMethodTester(Object object) {
+    public PrivateMethodTester(Object object, Class<?> clazz) {
         this.object = object;
-        this.clazz = object.getClass();
+        this.clazz = clazz;
     }
 
+    public PrivateMethodTester(Object object) {
+        this(object, object.getClass());
+    }
+
+    public PrivateMethodTester(Class<?> clazz) {
+        this(null, clazz);
+    }
+
+    /**
+     * Method to invoke a private method on the object of this PrivateMethodTester
+     *
+     * @param name       the name of the private method
+     * @param parameters a variable number of parameters, each of which determines its corresponding class
+     * @return the result of invoking the named private method with the given parameters.
+     */
     public Object invokePrivate(String name, Object... parameters) {
-        Class<?>[] classes = getClasses(parameters);
+        return findAndInvokePrivateMethod(name, getClasses(parameters), parameters, true);
+    }
+
+    /**
+     * Method to invoke a private method on the object of this PrivateMethodTester but where we look for a method matching an explicit set of parameter classes.
+     *
+     * @param name       the name of the private method
+     * @param classes    the classes of the corresponding parameters
+     * @param parameters a variable number of parameters, each of which determines its corresponding class
+     * @return the result of invoking the named private method with the given parameters.
+     */
+    public Object invokePrivateExplicit(String name, Class<?>[] classes, Object... parameters) {
         final int length = parameters.length;
+        if (classes.length != length) throw new RuntimeException(name + ": number of classes " + classes.length +
+                " does not match the number of parameters: " + length);
+        return findAndInvokePrivateMethod(name, classes, parameters, false);
+    }
+
+    private Object findAndInvokePrivateMethod(String name, Class<?>[] classes, Object[] parameters, boolean allowSubstitutions) {
         try {
-            Method m = getPrivateMethod(name, classes, length);
+            Method m = getPrivateMethod(name, classes, classes.length, allowSubstitutions);
             return invokePrivateMethod(m, parameters);
         } catch (NoSuchMethodException e) {
-            throw new RuntimeException(name + ": method not found for given " + length +
-                    " parameters");
+            StringBuffer sb = new StringBuffer();
+            Method[] declaredMethods = clazz.getDeclaredMethods();
+            for (Method m : declaredMethods) sb.append(m+", ");
+            throw new RuntimeException(name + ": method not found for given " + classes.length +
+                    " parameter classes [did you consider that the method might be declared for a superclass or interface of one or more of your parameters? If so, use the invokePrivateExplicit method]. Here is a list of declared methods: "+sb);
         }
     }
 
-    private Method getPrivateMethod(String name, Class<?>[] classes, int length) throws NoSuchMethodException {
+    private Method getPrivateMethod(String name, Class<?>[] classes, int length, boolean allowSubstitutions) throws NoSuchMethodException {
         if (length == 0) return getPrivateMethodNoParams(name);
-        else return getMethodParams(name, classes, length);
+        else return getPrivateMethodParams(name, classes, length, allowSubstitutions);
     }
 
-    private Method getMethodParams(String name, Class<?>[] classes, int length) throws NoSuchMethodException {
+    private Method getPrivateMethodParams(String name, Class<?>[] classes, int length, boolean allowSubstitutions) throws NoSuchMethodException {
+        try {
+            return findPrivateMethod(name, classes);
+        } catch (NoSuchMethodException nsme) {
+            if (allowSubstitutions)
+                return getMethodWithSubstitutions(name, classes, length);
+            else
+                throw nsme;
+        }
+    }
+
+    private Method getMethodWithSubstitutions(String name, Class<?>[] classes, int length) throws NoSuchMethodException {
         for (int i = 0; i < getCombinations(length); i++) {
             Class<?>[] effectiveClasses = new Class<?>[length];
             System.arraycopy(classes, 0, effectiveClasses, 0, length);
@@ -52,6 +98,7 @@ public class PrivateMethodTester {
     }
 
     private Method getPrivateMethod(String name, Class<?>[] classes, int i, Class<?>[] effectiveClasses) throws NoSuchMethodException {
+        // TODO: This method will substitute primitive classes for object classes. But we need to substitute superclasses and interfaces as well.
         for (int j = 0; j < classes.length; j++) {
             if (((i >> j) & 1) == 1) effectiveClasses[j] = getPrimitiveClass(classes[j]);
             try {
@@ -76,11 +123,7 @@ public class PrivateMethodTester {
     }
 
     private Method findPrivateMethod(String name, Class<?>[] classes) throws NoSuchMethodException {
-//        System.out.println("getDeclaredMethod "+name+" with classes: ");
-//        for (Class<?> clazz : classes)
-//            System.out.println("  "+clazz);
         Method m = clazz.getDeclaredMethod(name, classes);
-//        System.out.println("found "+name);
         m.setAccessible(true);
         return m;
     }
