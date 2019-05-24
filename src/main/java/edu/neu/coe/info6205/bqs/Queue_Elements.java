@@ -24,16 +24,23 @@ public class Queue_Elements<Item> implements SizedIterable<Item>, Queue<Item>  {
      *
      * @param item the item to add
      */
-    public void enqueue( Item item) {
-        // TODO
+    public void enqueue(Item item) {
+        // TO BE IMPLEMENTED ...
+        // ... END IMPLEMENTATION
     }
 
-    public
-    Item dequeue() {
+
+    /**
+     * Dequeue an element from the oldest list and return the item.
+     *
+     * @return the value of the oldest element.
+     */
+    public Item dequeue() {
         if (isEmpty()) return null;
         else {
-            // TODO
+            // TO BE IMPLEMENTED ...
             return null;
+            // ... END IMPLEMENTATION
         }
     }
 

@@ -96,7 +96,8 @@ public class DList<Item> implements Iterable<Item> {
      * @param prev may NOT be null
      */
     public void addAfterElement(Item item, D_Element prev) {
-        // TODO
+        // TO BE IMPLEMENTED ...
+        // ... END IMPLEMENTATION
     }
 
     /**
@@ -105,17 +106,20 @@ public class DList<Item> implements Iterable<Item> {
      * @param element the element to be removed.
      */
     public void remove(D_Element element) {
-        // TODO
+        // TO BE IMPLEMENTED ...
+        // ... END IMPLEMENTATION
     }
 
     public D_Element findFirst(Item item) {
-        // TODO
+        // TO BE IMPLEMENTED ...
         return null;
+        // ... END IMPLEMENTATION
     }
 
     public D_Element findLast(Item item) {
-        // TODO
+        // TO BE IMPLEMENTED ...
         return null;
+        // ... END IMPLEMENTATION
     }
 
     public boolean isEmpty() {
