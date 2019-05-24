@@ -91,8 +91,9 @@ public class Bag_Array<Item> implements Bag<Item> {
      */
     private static <T> T[] growFrom(T[] from, int size) {
         // TO BE IMPLEMENTED ...
-        // ... END IMPLEMENTATION
+        // NOTE that we cannot use Arrays.copyOf here because we are extending the length of the array.
         return null;
+        // ... END IMPLEMENTATION
     }
 
     private Item[] items = null;

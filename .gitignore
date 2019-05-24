@@ -35,3 +35,12 @@ bin/*
 "Quizzes and Exams"/
 
 src/main/java/edu/neu/coe/info6205/sort/simple/MergeSortDecisionTree\.java
+src/main/resources/sample\.kml
+
+tunnels\.kml
+
+NEU Tunnel System \(updated\)\.kml
+
+NEU Tunnel System latest\.kml
+
+*.kml

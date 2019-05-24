@@ -3,56 +3,26 @@ package edu.neu.coe.info6205.lab_1;
 import java.util.Objects;
 import java.util.Random;
 
-/**
- * This class is models a wheel of fortune.
- * The set of possible events is provided in the constructor(s).
- * Each event specifies the event itself and the frequency of that event's occurrence.
- *
- * @param <T> the event type.
- */
 public class WheelOfFortune<T> {
 
-    /**
-     * Constructor specifying a random number source and a set of events.
-     *
-     * @param random the random source.
-     * @param events the (variable number of) events.
-     */
     public WheelOfFortune(Random random, Event<T> ...events) {
         this.random = random;
         this.events = events;
         this.total = getTotal();
     }
 
-    /**
-     * Constructor specifying the seed for a random number source and a set of events.
-     *
-     * @param seed the seed for a random source.
-     * @param events the (variable number of) events.
-     */
     public WheelOfFortune(long seed, Event<T> ...events) {
         this(new Random(seed), events);
     }
 
-    /**
-     * Constructor specifying a set of events.
-     * A random number generator is created with a random seed.
-     *
-     * @param events the (variable number of) events.
-     */
     public WheelOfFortune(Event<T> ...events) {
         this(new Random(), events);
     }
 
-    /**
-     * Method to get the next randomly chosen event.
-     *
-     * @return an event of type T
-     */
     public T get() {
-        // TO BE IMPLEMENTED
-        throw new RuntimeException("Not yet implemented");
-        // END IMPLEMENTATION
+        // TO BE IMPLEMENTED ...
+        // END OF IMPLEMENTATION
+        throw new RuntimeException("logic error:"+this);
     }
 
     // Private stuff...
@@ -67,12 +37,6 @@ public class WheelOfFortune<T> {
     private final int total;
 
     // Class (static) stuff...
-
-    /**
-     * The Event type which includes the event itself and its frequency.
-     *
-     * @param <E> the event type.
-     */
     static class Event<E> {
         final E event;
         final int frequency;
@@ -97,15 +61,8 @@ public class WheelOfFortune<T> {
         }
     }
 
-    /**
-     * A public static factory method for an Event.
-     *
-     * @param event the event.
-     * @param frequency its frequency.
-     * @param <E> the event type.
-     * @return a newly-constructed Event<E.
-     */
     public static <E> Event<E> valueOf(E event, int frequency) {
-        return new Event<E>(event, frequency);
+        return new Event<>(event, frequency);
     }
+
 }

@@ -1,20 +1,55 @@
 package edu.neu.coe.info6205.graphs.dag;
 
-import java.util.function.Function;
+import edu.neu.coe.info6205.SizedIterable;
 
-public interface DAG<Vertex> {
+import java.util.function.Consumer;
 
-    Iterable<Vertex> vertices();
+/**
+ * DAG interface for directed acyclic graphs.
+ *
+ * @tparam <V> type of each vertex;
+ * @tparam <E> type of edge attribute;
+ */
+public interface DAG<V, E> {
 
-    Iterable<Edge<Vertex>> adjacent(Vertex vertex);
+    /**
+     * Get the vertices of this DAG as an Iterable.
+     * @return the vertices
+     */
+    SizedIterable<V> vertices();
 
-    void dfs(Vertex vertex, Function<Vertex, Void> pre, Function<Vertex, Void> post);
+    /**
+     * Get the edges of this DAG as a SizedIterable.
+     * @return the vertices
+     */
+    SizedIterable<Edge<V, E>> edges();
 
-    Iterable<Vertex> sorted();
+    /**
+     * Get the edges which are adjacent to the given vertex.
+     * @param vertex the vertex whose adjacent edges we want.
+     * @return the adjacent edges as an Iterable.
+     */
+    Iterable<Edge<V, E>> adjacent(V vertex);
 
-    DAG<Vertex> reverse();
+    /**
+     * Implement depth-first-search on this DAG, starting at vertex.
+     * @param vertex the starting point.
+     * @param pre a function which takes the current vertex before recursively calling dfs.
+     * @param post a function which takes the current vertex after recursively calling dfs.
+     */
+    void dfs(V vertex, Consumer<V> pre, Consumer<V> post);
 
-    int V();
+    /**
+     * Get a topologically sorted list of vertex from this DAG.
+     * @return the vertices as an Iterable.
+     */
+    Iterable<V> sorted();
 
-    int E();
+    /**
+     * Reverse the sense of this DAG.
+     *
+     * @return a DAG whose edges all point in the opposite direction to those in this DAG.
+     */
+    DAG<V, E> reverse();
+
 }

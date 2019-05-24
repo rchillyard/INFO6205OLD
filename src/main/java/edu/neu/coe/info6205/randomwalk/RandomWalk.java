@@ -27,10 +27,10 @@ public class RandomWalk {
     /**
      * Perform a random walk of m steps
      *
-     * @param n the number of steps the drunkard takes
+     * @param m the number of steps the drunkard takes
      */
-    public void randomWalk(int n) {
-        // TO BE IMPLEMENTED ... (n random moves)
+    private void randomWalk(int m) {
+        // TO BE IMPLEMENTED ...
         // ... END IMPLEMENTATION
     }
 

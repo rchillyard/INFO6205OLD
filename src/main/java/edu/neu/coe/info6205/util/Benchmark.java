@@ -12,7 +12,6 @@ import edu.neu.coe.info6205.sort.simple.Sort;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
@@ -146,8 +145,6 @@ public class Benchmark<T> {
     private final Consumer<T> fPost;
 
     /**
-     * ======================================= MAIN PROGRAM: NOT USED IN ASSIGNMENT 2 ========================================
-     *
      * Everything below this point has to do with a particular example of running a Benchmark
      * for various sort methods.
      * In this case, we time two types of simple sort on a random integer array of length 1000.
@@ -172,9 +169,7 @@ public class Benchmark<T> {
 
     private static void benchmarkSort(Integer[] array, String name, Sort<Integer> sorter, int m) {
         UnaryOperator<Integer[]> preFunction = (xs) -> Arrays.copyOf(array, array.length);
-        Consumer<Integer[]> sortFunction = (xs) -> {
-            sorter.sort(xs, false);
-        };
+        Consumer<Integer[]> sortFunction = (xs) -> sorter.sort(xs, false);
         final Helper<Integer> helper = sorter.getHelper();
         Consumer<Integer[]> cleanupFunction = (xs) -> {
             if (!helper.sorted(xs)) throw new RuntimeException("not sorted");

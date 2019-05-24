@@ -112,14 +112,14 @@ public class DList<Item> implements Iterable<Item> {
 
     public D_Element findFirst(Item item) {
         // TO BE IMPLEMENTED ...
-        // ... END IMPLEMENTATION
         return null;
+        // ... END IMPLEMENTATION
     }
 
     public D_Element findLast(Item item) {
         // TO BE IMPLEMENTED ...
-        // ... END IMPLEMENTATION
         return null;
+        // ... END IMPLEMENTATION
     }
 
     public boolean isEmpty() {

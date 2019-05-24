@@ -15,7 +15,7 @@ public class BSTSimple<Key extends Comparable<Key>, Value> implements BSTdetail<
      */
     @Override
     public void putAll(Map<Key, Value> map) {
-        List<Key> ks = new ArrayList(map.keySet());
+        @SuppressWarnings("unchecked") List<Key> ks = new ArrayList(map.keySet());
         Collections.shuffle(ks);
         for (Key k : ks) put(k, map.get(k));
     }
@@ -122,8 +122,8 @@ public class BSTSimple<Key extends Comparable<Key>, Value> implements BSTdetail<
 
     private Node delete(Node x, Key key) {
         // TO BE IMPLEMENTED ...
+        return null;
         // ... END IMPLEMENTATION
-        return x;
     }
 
     private Node deleteMin(Node x) {
@@ -186,7 +186,7 @@ public class BSTSimple<Key extends Comparable<Key>, Value> implements BSTdetail<
 
         final Key key;
         Value value;
-        int depth;
+        final int depth;
         Node smaller = null;
         Node larger = null;
         int count = 0;

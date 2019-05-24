@@ -16,8 +16,11 @@ public class Moves3 implements Moves {
     }
 
     public boolean valid(Point t) {
+        // DO NOT PUBLISH THIS IN PUBLIC REPO!!!!
+        Point p = t;
         while (true) {
             // TO BE IMPLEMENTED ...  Sorry, but you have to do this one yourself!
+            return false;
             // ... END IMPLEMENTATION
         }
     }
